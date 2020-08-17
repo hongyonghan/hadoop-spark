@@ -1,0 +1,34 @@
+version: "3"
+services: 
+
+    master: 
+        container_name: hadoop-master
+        image: spark:3.0
+        hostname: hadoop-master
+        ports: 
+            - 50070:50070
+            - 8088:8088
+            - 4040:4040
+            - 18080:18080
+            - 16010:16010
+        tty: true
+    slave1: 
+        container_name: hadoop-slave1
+        image: spark:3.0
+        hostname: hadoop-slave1
+        depends_on: 
+            - master
+        tty: true
+    slave2: 
+        container_name: hadoop-slave2
+        image: spark:3.0
+        hostname: hadoop-slave2
+        depends_on: 
+            - slave1
+        tty: true
+        
+networks: 
+    default: 
+        external: 
+            name: hadoop
+           

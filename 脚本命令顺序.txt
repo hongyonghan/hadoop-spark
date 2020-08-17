@@ -1,0 +1,24 @@
+
+1.启动三个容器
+docker-compose -f spark-compose.yml up -d
+2.进入hadoop-master容器。
+docker exec -ti hadoop-master bash
+3.启动hadoop和spark的相关服务。
+./start-all.sh
+4.使用spark迭代100次计算PI的值。
+./runPI.sh
+在这个过程中可以去这个页面看计算过程。但是计算一旦结束就不能看了。
+http://192.168.80.100:4040/jobs/
+5.初始化hive的环境（在此之前删除hive数据库）
+./initialize.sh
+6.启动zookeeper
+./init_zk.sh
+7.启动hbase
+start-hbase.sh
+8.jps展示所有服务。
+
+
+最后展示的页面：
+hdfs页面：http://192.168.80.100:50070/dfshealth.html#tab-overview
+hbase页面：http://192.168.80.100:16010/master-status#userTables
+spark历史job服务页面：http://192.168.80.100:18080/

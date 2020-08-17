@@ -1,0 +1,5 @@
+sc.textFile("input").
+flatMap(_.split(" "))
+.map((_,1)).
+reduceByKey(_+_).
+collect
